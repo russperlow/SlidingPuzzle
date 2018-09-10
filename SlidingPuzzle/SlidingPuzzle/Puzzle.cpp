@@ -6,6 +6,8 @@ Puzzle::Puzzle(int _dimension)
 {
 	dimension = _dimension;
 
+	blankSpace = dimension * dimension;
+
 	// Give the board its width dimension
 	board.resize(dimension);
 
@@ -15,7 +17,7 @@ Puzzle::Puzzle(int _dimension)
 		board[i].resize(dimension);
 
 		for (int j = 0; j < dimension; j++) {
-			int value = (i * dimension) + j;
+			int value = (i * dimension) + j + 1;
 			Vertex* vertex = new Vertex(i, j, value);
 			board[i][j] = vertex;
 		}
@@ -36,7 +38,7 @@ Vertex* Puzzle::GetBlankSpace()
 {
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
-			if (board[i][j]->GetValue() == 0) {
+			if (board[i][j]->GetValue() == blankSpace) {
 				return board[i][j];
 			}
 		}
@@ -48,9 +50,11 @@ Vertex* Puzzle::GetBlankSpace()
 /*
 	* Swap the chosen space with the blank space
 */
-void Puzzle::Swap()
+void Puzzle::Swap(int x1, int y1, int x2, int y2)
 {
-
+	int tempValue = board[x1][y1]->GetValue();
+	board[x1][y1]->SetValue(board[x2][y2]->GetValue());
+	board[x2][y2]->SetValue(tempValue);
 }
 
 /*
@@ -59,7 +63,7 @@ void Puzzle::Swap()
 void Puzzle::Print() {
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
-			if (board[i][j]->GetValue() == 0)
+			if (board[i][j]->GetValue() == blankSpace)
 				cout << " |";
 			else
 				cout << board[i][j]->GetValue() << "|";
@@ -92,4 +96,55 @@ void Puzzle::Shuffle()
 		}
 	}
 
+}
+
+/*
+	* Check to see if the puzzle is solved
+*/
+bool Puzzle::CheckSolved()
+{
+	// We use the same loops that we do to create the puzzle, before shuffling, to get the completed puzzle
+	for (int i = 0; i < dimension; i++) {
+		for (int j = 0; j < dimension; j++) {
+
+			// The inital value that this vertex would have prior to shuffling
+			int value = (i * dimension) + j + 1;
+
+
+			if (board[i][j]->GetValue() != value)
+				return false;
+		}
+	}
+
+	return true;
+}
+
+/*
+	* Gets the neighbors for the given vertex
+*/
+vector<Vertex*> Puzzle::GetNeighbors(Vertex* vertex)
+{
+	int x = vertex->GetX();
+	int y = vertex->GetY();
+
+	vector<Vertex*> neighbors;
+
+	if(x > 0){
+		neighbors.push_back(board[x - 1][y]);
+	}
+
+	if (x < dimension - 1) {
+		neighbors.push_back(board[x + 1][y]);
+	}
+
+	if (y > 0) {
+		neighbors.push_back(board[x][y - 1]);
+	}
+
+	if (y < dimension - 1) {
+		neighbors.push_back(board[x][y + 1]);
+	}
+
+
+	return neighbors;
 }
