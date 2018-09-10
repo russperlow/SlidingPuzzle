@@ -1,5 +1,2 @@
-﻿  Puzzle.cpp
-c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\puzzle.cpp(80): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  SlidingPuzzle.cpp
-  Generating Code...
+﻿  SlidingPuzzle.cpp
   SlidingPuzzle.vcxproj -> C:\Users\admin\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe
