@@ -20,6 +20,8 @@ Puzzle::Puzzle(int _dimension)
 			board[i][j] = vertex;
 		}
 	}
+
+	Shuffle();
 }
 
 
@@ -64,4 +66,30 @@ void Puzzle::Print() {
 		}
 		cout << endl;
 	}
+}
+
+/*
+	* Randomly swaps around pieces to shuffle
+*/
+void Puzzle::Shuffle()
+{
+	srand(time(NULL));
+
+	for (int i = 0; i < dimension; i++) {
+		for (int j = 0; j < dimension; j++) {
+
+			// Randomly get an x and y to choose a vert
+			int randX = rand() % dimension;
+			int randY = rand() % dimension;
+
+			Vertex* thisVert = board[i][j];
+			Vertex* swapVert = board[randX][randY];
+
+			// Swap the values of this vert and the random vert
+			int thisValue = thisVert->GetValue();
+			thisVert->SetValue(swapVert->GetValue());
+			swapVert->SetValue(thisValue);
+		}
+	}
+
 }

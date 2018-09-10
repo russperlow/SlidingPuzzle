@@ -8,6 +8,7 @@ public:
 	int GetX();
 	int GetY();
 	int GetValue();
+	void SetValue(int);
 private:
 	int x;
 	int y;

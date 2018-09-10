@@ -32,3 +32,8 @@ int Vertex::GetValue()
 {
 	return value;
 }
+
+void Vertex::SetValue(int _value)
+{
+	this->value = _value;
+}

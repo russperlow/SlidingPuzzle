@@ -10,6 +10,7 @@ public:
 	Vertex* GetBlankSpace();
 	void Swap();
 	void Print();
+	void Shuffle();
 private:
 	int dimension;
 	vector<vector<Vertex*>> board;
