@@ -32,7 +32,7 @@ Puzzle::~Puzzle()
 }
 
 /*
-	* Find the vertex that contains "0" on the board
+	* Find the vertex that contains dimension^2 on the board
 */
 Vertex* Puzzle::GetBlankSpace()
 {
@@ -52,9 +52,16 @@ Vertex* Puzzle::GetBlankSpace()
 */
 void Puzzle::Swap(int x1, int y1, int x2, int y2)
 {
+	// Swap the number value
 	int tempValue = board[x1][y1]->GetValue();
 	board[x1][y1]->SetValue(board[x2][y2]->GetValue());
 	board[x2][y2]->SetValue(tempValue);
+}
+
+void Puzzle::Swap(Vertex* vert1, Vertex* vert2) {
+	Vertex tempVert = *vert1;
+	*vert1 = *vert2;
+	*vert2 = tempVert;
 }
 
 /*
@@ -73,7 +80,7 @@ void Puzzle::Print() {
 }
 
 /*
-	* Randomly swaps around pieces to shuffle
+	* Randomly moves around pieces to shuffle
 */
 void Puzzle::Shuffle()
 {
@@ -87,25 +94,21 @@ void Puzzle::Shuffle()
 	board[2][1]->SetValue(8);
 	board[2][2]->SetValue(6);
 
+
+	// Shuffle by randomly swaping pieces starting from the goal form
+
 	//srand(time(NULL));
 
-	//for (int i = 0; i < dimension; i++) {
-	//	for (int j = 0; j < dimension; j++) {
+	//int numMoves = rand() % 15 + 5; // Shuffle between 5 and 15 times
 
-	//		// Randomly get an x and y to choose a vert
-	//		int randX = rand() % dimension;
-	//		int randY = rand() % dimension;
+	//for (int i = 0; i <= numMoves; i++) {
+	//	Vertex* blankSpace = GetBlankSpace();
 
-	//		Vertex* thisVert = board[i][j];
-	//		Vertex* swapVert = board[randX][randY];
+	//	vector<Vertex*> blankNeighbors = GetNeighbors(blankSpace);
 
-	//		// Swap the values of this vert and the random vert
-	//		int thisValue = thisVert->GetValue();
-	//		thisVert->SetValue(swapVert->GetValue());
-	//		swapVert->SetValue(thisValue);
-	//	}
+	//	int neighborSwap = rand() % static_cast<int>(blankNeighbors.size());
+	//	Swap(blankSpace->GetX(), blankSpace->GetY(), blankNeighbors[neighborSwap]->GetX(), blankNeighbors[neighborSwap]->GetY());
 	//}
-
 }
 
 /*
@@ -142,48 +145,12 @@ void Puzzle::SolveA()
 */
 void Puzzle::SolveHill()
 {
-	vector<vector<Vertex>> copyOfPuzzle;
 
-	copyOfPuzzle.resize(dimension);
+}
 
-	// Get a copy of the puzzle to use
-	for (int i = 0; i < dimension; i++) {
-		copyOfPuzzle[i].resize(dimension);
-		for (int j = 0; j < dimension; j++) {
-			copyOfPuzzle[i][j] = *board[i][j];
-		}
-	}
-
-
-	int depth = 5;
-	int minX = INT16_MAX;
-	int minY = INT16_MAX;
-	Vertex blankSpaceVert;
-	vector<Vertex*> neighbors;
-
-	
-	for (int i = 0; i < depth; i++) {
-
-		// Loop through to find the blank space then its neighbors
-		for (int j = 0; j < dimension; j++) {
-			for (int k = 0; k < dimension; k++) {
-				if (copyOfPuzzle[i][j].GetValue() == blankSpace) {
-					blankSpaceVert = copyOfPuzzle[i][j];
-					neighbors = GetNeighbors(&blankSpaceVert);
-					break;
-				}
-			}
-		}
-
-		for (const auto& v : neighbors) {
-			
-		}
-
-	}
-
-
-
-
+int Puzzle::getDimension()
+{
+	return dimension;
 }
 
 /*
@@ -216,25 +183,28 @@ vector<Vertex*> Puzzle::GetNeighbors(Vertex* vertex)
 	return neighbors;
 }
 
-bool Puzzle::CheckClosedList(Vertex& vertex)
+vector<Vertex*> Puzzle::GetNeighbors(int x, int y)
 {
-	for (int i = 0; i < static_cast<int>(closedSet.size()); i++) {
-		if (&vertex == closedSet[i]) {
-			return true;
-		}
-	}
-	return false;
+	vector<Vertex*> neighbors;
 
+	if (x > 0) {
+		neighbors.push_back(board[x - 1][y]);
+	}
+
+	if (x < dimension - 1) {
+		neighbors.push_back(board[x + 1][y]);
+	}
+
+	if (y > 0) {
+		neighbors.push_back(board[x][y - 1]);
+	}
+
+	if (y < dimension - 1) {
+		neighbors.push_back(board[x][y + 1]);
+	}
+
+
+	return neighbors;
 }
 
-bool Puzzle::CheckOpenList(Vertex& vertex)
-{
-
-	for (int i = 0; i < static_cast<int>(openSet.size()); i++) {
-		if (&vertex == openSet[i]) {
-			return true;
-		}
-	}
-	return false;
-}
 

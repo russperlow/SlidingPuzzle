@@ -63,12 +63,3 @@ void Vertex::SetPathNode(Vertex* _pathNode)
 	pathNode = _pathNode;
 }
 
-void Vertex::AddToHillCount(int add)
-{
-	hillCount = hillCount + add
-}
-
-void Vertex::ResetHillCount()
-{
-	hillCount = 0;
-}
