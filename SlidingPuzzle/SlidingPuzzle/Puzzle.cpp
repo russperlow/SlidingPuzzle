@@ -18,7 +18,7 @@ Puzzle::Puzzle(int _dimension)
 
 		for (int j = 0; j < dimension; j++) {
 			int value = (i * dimension) + j + 1;
-			Vertex* vertex = new Vertex(value); //new Vertex(i, j, value);
+			Vertex* vertex = new Vertex(i, j, value);
 			board[i][j] = vertex;
 		}
 	}

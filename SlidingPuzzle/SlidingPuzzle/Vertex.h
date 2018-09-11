@@ -3,11 +3,10 @@ class Vertex
 {
 public:
 	Vertex();
-	Vertex(int);
-	//Vertex(int, int, int);
+	Vertex(int, int, int);
 	~Vertex();
 	int GetValue();
-	int GetG();
+	int GetG(int, int);
 	int GetH();
 	int GetF();
 	void SetValue(int);
@@ -21,7 +20,7 @@ private:
 	int H; // Should be calculated using manhattan distance
 	int hillCount;
 	Vertex* pathNode = nullptr;
-	//int x;
-	//int y;
+	int startX;
+	int startY;
 };
 

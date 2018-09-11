@@ -6,16 +6,12 @@ Vertex::Vertex()
 {
 }
 
-Vertex::Vertex(int _value) {
+Vertex::Vertex(int _x, int _y, int _value)
+{
+	this->startX = _x;
+	this->startY = _y;
 	this->value = _value;
 }
-
-//Vertex::Vertex(int _x, int _y, int _value)
-//{
-//	this->x = _x;
-//	this->y = _y;
-//	this->value = _value;
-//}
 
 Vertex::~Vertex()
 {
@@ -26,11 +22,22 @@ int Vertex::GetValue()
 	return value;
 }
 
-int Vertex::GetG()
+/*
+	* Cost from starting state to current state
+*/
+int Vertex::GetG(int currentX, int currentY)
 {
+	int xDist = currentX - startX;
+	int yDist = currentY - startY;
+
+	G = xDist + yDist;
+
 	return G;
 }
 
+/*
+	* Estimated cost from current state to end state
+*/
 int Vertex::GetH()
 {
 	return H;
