@@ -8,6 +8,7 @@ public:
 	Puzzle(int);
 	~Puzzle();
 	Vertex* GetBlankSpace();
+	void GetBlankSpace(int&, int&);
 	void Swap(int, int, int, int);
 	void Swap(Vertex*, Vertex*);
 	void Print();

@@ -47,6 +47,18 @@ Vertex* Puzzle::GetBlankSpace()
 	return nullptr;
 }
 
+void Puzzle::GetBlankSpace(int& x, int& y)
+{
+	for (int i = 0; i < dimension; i++) {
+		for (int j = 0; j < dimension; j++) {
+			if (board[i][j]->GetValue() == blankSpace) {
+				x = i;
+				y = j;
+			}
+		}
+	}
+}
+
 /*
 	* Swap the chosen space with the blank space
 */
