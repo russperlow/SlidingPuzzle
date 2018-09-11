@@ -33,7 +33,42 @@ int Vertex::GetValue()
 	return value;
 }
 
+int Vertex::GetG()
+{
+	return G;
+}
+
+int Vertex::GetH()
+{
+	return H;
+}
+
+int Vertex::GetF()
+{
+	return G + H;
+}
+
 void Vertex::SetValue(int _value)
 {
 	this->value = _value;
+}
+
+void Vertex::SetG(int _G)
+{
+	G = _G;
+}
+
+void Vertex::SetPathNode(Vertex* _pathNode)
+{
+	pathNode = _pathNode;
+}
+
+void Vertex::AddToHillCount(int add)
+{
+	hillCount = hillCount + add
+}
+
+void Vertex::ResetHillCount()
+{
+	hillCount = 0;
 }

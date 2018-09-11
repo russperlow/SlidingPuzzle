@@ -12,6 +12,8 @@ public:
 	void Print();
 	void Shuffle();
 	bool CheckSolved();
+	void SolveA();
+	void SolveHill();
 	vector<Vertex*> GetNeighbors(Vertex*);
 private:
 	int dimension;
