@@ -1,7 +1,4 @@
 ﻿  Puzzle.cpp
-c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\puzzle.cpp(84): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  SlidingPuzzle.cpp
-  Vertex.cpp
-  Generating Code...
-c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\puzzle.cpp(49): warning C4715: 'Puzzle::GetBlankSpace': not all control paths return a value
-  SlidingPuzzle.vcxproj -> C:\Users\admin\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe
+c:\users\russp\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\puzzle.cpp(84): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\russp\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\puzzle.cpp(49): warning C4715: 'Puzzle::GetBlankSpace': not all control paths return a value
+  SlidingPuzzle.vcxproj -> C:\Users\russp\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe

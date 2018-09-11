@@ -6,10 +6,8 @@ Vertex::Vertex()
 {
 }
 
-Vertex::Vertex(int _x, int _y, int _value)
+Vertex::Vertex(int _value)
 {
-	this->startX = _x;
-	this->startY = _y;
 	this->value = _value;
 }
 
@@ -17,21 +15,19 @@ Vertex::~Vertex()
 {
 }
 
+/*
+	* Returns the number value of this vertex
+*/
 int Vertex::GetValue()
 {
 	return value;
 }
 
 /*
-	* Cost from starting state to current state
+	* Estimated cost from start state to current state
 */
-int Vertex::GetG(int currentX, int currentY)
+int Vertex::GetG()
 {
-	int xDist = currentX - startX;
-	int yDist = currentY - startY;
-
-	G = xDist + yDist;
-
 	return G;
 }
 
@@ -43,33 +39,10 @@ int Vertex::GetH()
 	return H;
 }
 
-int Vertex::GetF()
-{
-	return G + H;
-}
-
+/*
+	************************************** ONLY USED FOR TESTING SHOULD BE REMOVED **************************************
+*/
 void Vertex::SetValue(int _value)
 {
 	this->value = _value;
 }
-
-void Vertex::SetG(int _G)
-{
-	G = _G;
-}
-
-void Vertex::SetPathNode(Vertex* _pathNode)
-{
-	pathNode = _pathNode;
-}
-
-//int Vertex::GetX()
-//{
-//	return x;
-//}
-//
-//int Vertex::GetY()
-//{
-//	return y;
-//}
-

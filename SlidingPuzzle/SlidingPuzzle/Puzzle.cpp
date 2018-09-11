@@ -18,7 +18,7 @@ Puzzle::Puzzle(int _dimension)
 
 		for (int j = 0; j < dimension; j++) {
 			int value = (i * dimension) + j + 1;
-			Vertex* vertex = new Vertex(i, j, value);
+			Vertex* vertex = new Vertex(value);
 			board[i][j] = vertex;
 		}
 	}
@@ -115,10 +115,17 @@ void Puzzle::Shuffle()
 }
 
 /*
-	* Check to see if the puzzle is solved
+	* Check to see if the main puzzle is solved
 */
 bool Puzzle::CheckSolved()
 {
+	return CheckSolved(board);
+}
+
+/*
+	* Checks to see if the given board is solved
+*/
+bool Puzzle::CheckSolved(vector<vector<Vertex*>> _board) {
 	// We use the same loops that we do to create the puzzle, before shuffling, to get the completed puzzle
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
@@ -127,7 +134,7 @@ bool Puzzle::CheckSolved()
 			int value = (i * dimension) + j + 1;
 
 
-			if (board[i][j]->GetValue() != value)
+			if (_board[i][j]->GetValue() != value)
 				return false;
 		}
 	}
@@ -140,6 +147,44 @@ bool Puzzle::CheckSolved()
 */
 void Puzzle::SolveA()
 {
+	State s = State(board, 0);
+	vector<State> states;
+
+	states.push_back(s);
+
+	while (static_cast<int>(states.size()) > 0) {
+		State state = states.back();
+		states.pop_back();
+
+		vector<vector<Vertex*>> stateBoard = state.GetBoard();
+
+		if (CheckSolved(stateBoard)) {
+			// RETURN PATH
+		}
+
+		// Get children of state
+		VisitState(state);
+
+
+	}
+
+
+}
+
+void Puzzle::VisitState(State state)
+{
+	vector<vector<Vertex*>> stateBoard = state.GetBoard();
+
+	int blankX = 0;
+	int blankY = 0;
+	for (int i = 0; i < dimension; i++) {
+		for (int j = 0; j < dimension; j++) {
+			if (stateBoard[i][j]->GetValue() == blankSpace) {
+				blankX = i;
+				blankY = j;
+			}
+		}
+	}
 
 }
 
