@@ -7,9 +7,7 @@ class Puzzle
 public:
 	Puzzle(int);
 	~Puzzle();
-	Vertex* GetBlankSpace();
-	void GetBlankSpace(int&, int&);
-	void Swap(int, int, int, int);
+	Vertex* GetBlankSpace(int&, int&);
 	void Swap(Vertex*, Vertex*);
 	void Print();
 	void Shuffle();
@@ -17,7 +15,6 @@ public:
 	void SolveA();
 	void SolveHill();
 	int getDimension();
-	vector<Vertex*> GetNeighbors(Vertex*);
 	vector<Vertex*> GetNeighbors(int, int);
 private:
 	int dimension;

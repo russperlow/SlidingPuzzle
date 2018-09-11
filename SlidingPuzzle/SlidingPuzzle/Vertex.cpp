@@ -6,26 +6,19 @@ Vertex::Vertex()
 {
 }
 
-Vertex::Vertex(int _x, int _y, int _value)
-{
-	this->x = _x;
-	this->y = _y;
+Vertex::Vertex(int _value) {
 	this->value = _value;
 }
 
+//Vertex::Vertex(int _x, int _y, int _value)
+//{
+//	this->x = _x;
+//	this->y = _y;
+//	this->value = _value;
+//}
 
 Vertex::~Vertex()
 {
-}
-
-int Vertex::GetX()
-{
-	return x;
-}
-
-int Vertex::GetY()
-{
-	return y;
 }
 
 int Vertex::GetValue()
@@ -62,4 +55,14 @@ void Vertex::SetPathNode(Vertex* _pathNode)
 {
 	pathNode = _pathNode;
 }
+
+//int Vertex::GetX()
+//{
+//	return x;
+//}
+//
+//int Vertex::GetY()
+//{
+//	return y;
+//}
 
