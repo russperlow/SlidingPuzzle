@@ -1,12 +1,2 @@
-﻿  Puzzle.cpp
-  Board.cpp
-c:\users\russp\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(108): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\russp\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(218): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-  Generating Code...
-c:\users\russp\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(73): warning C4715: 'Board::GetBlankSpace': not all control paths return a value
-c:\users\russp\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(242): warning C4715: 'Board::GetPosition': not all control paths return a value
-c:\users\russp\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\puzzle.cpp(62): warning C4715: 'Puzzle::SolveA': not all control paths return a value
-  Skipping... (no relevant changes detected)
-  State.cpp
-  SlidingPuzzle.cpp
-  SlidingPuzzle.vcxproj -> C:\Users\russp\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe
+﻿  SlidingPuzzle.cpp
+  SlidingPuzzle.vcxproj -> C:\Users\admin\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe

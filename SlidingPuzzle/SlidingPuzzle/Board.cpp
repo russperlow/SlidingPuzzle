@@ -25,6 +25,12 @@ Board::Board(const Board& _board)
 		}
 	}
 
+	// Copy path
+	int pathSize = static_cast<int>(_board.path.size());
+	for (int i = 0; i < pathSize; i++) {
+		path.push_back(_board.path[i]);
+	}
+
 }
 
 Board::Board(int _dimension)

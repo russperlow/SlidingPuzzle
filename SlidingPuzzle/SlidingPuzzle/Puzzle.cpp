@@ -90,7 +90,7 @@ vector<Board> Puzzle::VisitState(State state)
 			Vertex* oldBlankVert = newBoard.GetBlankSpace(blankX, blankY);
 
 			newBoard.Swap(swapVert, oldBlankVert); // Swap neighbor and blank space
-			newBoard.AddToPath(swapVert); // Add neighbor to path
+			newBoard.AddToPath(oldBlankVert); // Add neighbor to path
 			newBoard.SetLastMove(swapVert->GetValue()); // Store the last move
 			children.push_back(newBoard); // Add the board to children vector
 		}
