@@ -24,22 +24,6 @@ int Vertex::GetValue()
 }
 
 /*
-	* Estimated cost from start state to current state
-*/
-int Vertex::GetG()
-{
-	return G;
-}
-
-/*
-	* Estimated cost from current state to end state
-*/
-int Vertex::GetH()
-{
-	return H;
-}
-
-/*
 	************************************** ONLY USED FOR TESTING SHOULD BE REMOVED **************************************
 */
 void Vertex::SetValue(int _value)

@@ -2,26 +2,23 @@
 #include "stdafx.h"
 #include "Vertex.h"
 #include "State.h"
+#include "Board.h"
 
 class Puzzle
 {
 public:
-	Puzzle(int);
+	Puzzle();
 	~Puzzle();
-	Vertex* GetBlankSpace(int&, int&);
-	void Swap(Vertex*, Vertex*);
-	void Print();
-	void Shuffle();
-	bool CheckSolved();
-	bool CheckSolved(vector<vector<Vertex*>>);
-	void SolveA();
-	void VisitState(State);
+	
+	vector<Vertex*> SolveA(Board);
+	vector<Board> VisitState(State);
+
 	void SolveHill();
-	int getDimension();
-	vector<Vertex*> GetNeighbors(int, int);
+
+
 private:
 	int dimension;
 	int blankSpace;
-	vector<vector<Vertex*>> board;
+	Board myBoard;
 };
 

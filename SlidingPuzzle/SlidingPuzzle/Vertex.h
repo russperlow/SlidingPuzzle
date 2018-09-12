@@ -7,11 +7,6 @@ public:
 	~Vertex();
 	int GetValue();
 
-	// AStar Methods
-	int GetH();
-	int GetG();
-
-
 	void SetValue(int); // ************************************** ONLY USED FOR TESTING SHOULD BE REMOVED **************************************
 private:
 	int value;

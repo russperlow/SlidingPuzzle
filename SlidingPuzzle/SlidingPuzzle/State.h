@@ -1,15 +1,17 @@
 #pragma once
 #include "stdafx.h"
 #include "Vertex.h"
+#include "Board.h"
 
 class State
 {
 public:
-	State(vector<vector<Vertex*>>, int);
+	State(Board, int);
 	~State();
-	vector<vector<Vertex*>> GetBoard();
+	Board GetBoard();
+	int GetF();
 private:
-	vector<vector<Vertex*>> board;
+	Board board;
 	int distance;
 };
 
