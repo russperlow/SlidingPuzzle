@@ -101,9 +101,71 @@ vector<Board> Puzzle::VisitState(State state)
 /*
 	* Solves the puzzle using Hill Climbing
 */
-void Puzzle::SolveHill()
+void Puzzle::SolveHill(Board* _myBoard, int depth)
 {
+	// Loop over all possible move for the current board
+	myBoard = *_myBoard;
+	int x = 0;
+	int y = 0;
+	int valueToMove = HillMoves(myBoard, depth, depth);
 
+	_myBoard->Swap(_myBoard->GetPosition(valueToMove), _myBoard->GetBlankSpace(x, y));
 }
 
+/*
+	* Loops through all possible moves for current board
+	* Returns dF
+*/
+int Puzzle::HillMoves(Board _myBoard, int depth, int currLevel) {
+	
+	// Return 0 if we have reached the depth
+	if (currLevel == 0)
+		return 0;
+
+	// Store this given board
+	Board thisBoard = _myBoard;
+
+	// Get the blankspace for thisBoard
+	int blankX = 0;
+	int blankY = 0;
+	Vertex* blankVert = thisBoard.GetBlankSpace(blankX, blankY);
+
+	// Get all possible moves for this state
+	vector<Vertex*> neighbors = thisBoard.GetNeighbors(blankX, blankY);
+
+	int lowestMove = INT16_MAX; // Lowest dF of all neighbors of given depth
+	int vectorPosition = 0;
+
+	// Loop through all neighbors
+	for (int i = 0; i < static_cast<int>(neighbors.size()); i++) {
+
+		// Don't undo the last move, it's a waste
+		if (neighbors[i]->GetValue() != thisBoard.GetLastMove()) {
+
+			int dF = 0;
+
+			// Copy board & make move
+			Board newBoard = (thisBoard);
+
+			Vertex* swapVert = newBoard.GetPosition(neighbors[i]->GetValue());
+			Vertex* oldBlankVert = newBoard.GetBlankSpace(blankX, blankY);
+
+			newBoard.Swap(swapVert, oldBlankVert); // Swap neighbor and blank space
+			newBoard.SetLastMove(swapVert->GetValue()); // Store the last move
+
+			if(depth != currLevel)
+				return thisBoard.GetManhattanDistance() + HillMoves(newBoard, depth, currLevel-1);
+			else {
+				dF = thisBoard.GetManhattanDistance() + HillMoves(newBoard, depth, currLevel - 1);
+
+				// If we found a new lowest move, store it and the position of this vector in neighbors
+				if (dF < lowestMove) {
+					lowestMove = dF;
+					vectorPosition = i;
+				}
+			}
+		}
+	}
+	return neighbors[vectorPosition]->GetValue();
+}
 

@@ -13,9 +13,8 @@ public:
 	vector<Vertex*> SolveA(Board);
 	vector<Board> VisitState(State);
 
-	void SolveHill();
-
-
+	void SolveHill(Board*, int);
+	int HillMoves(Board, int, int);
 private:
 	int dimension;
 	int blankSpace;
