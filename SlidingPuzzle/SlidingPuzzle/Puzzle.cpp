@@ -108,7 +108,7 @@ void Puzzle::SolveHill(Board* _myBoard, int depth)
 	int x = 0;
 	int y = 0;
 	int valueToMove = HillMoves(myBoard, depth, depth);
-
+	_myBoard->SetLastMove(valueToMove);
 	_myBoard->Swap(_myBoard->GetPosition(valueToMove), _myBoard->GetBlankSpace(x, y));
 }
 

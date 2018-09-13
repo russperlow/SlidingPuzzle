@@ -1,2 +1,6 @@
-﻿  SlidingPuzzle.cpp
+﻿  Board.cpp
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(119): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(243): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(84): warning C4715: 'Board::GetBlankSpace': not all control paths return a value
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(267): warning C4715: 'Board::GetPosition': not all control paths return a value
   SlidingPuzzle.vcxproj -> C:\Users\admin\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe

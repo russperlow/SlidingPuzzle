@@ -7,6 +7,9 @@ Board::Board() {
 
 }
 
+/*
+	* COPY CONSTRUCTOR
+*/
 Board::Board(const Board& _board)
 {
 	// Copy over the dimension
@@ -31,6 +34,8 @@ Board::Board(const Board& _board)
 		path.push_back(_board.path[i]);
 	}
 
+	// Store last move
+	lastMovedValue = _board.lastMovedValue;
 }
 
 Board::Board(int _dimension)
@@ -107,26 +112,30 @@ void Board::Print() {
 */
 void Board::Shuffle()
 {
-	bool realShuffle = false;
+	bool realShuffle = true; // Just a variable to make testing more simple
 
 	if (realShuffle) {
 		// Shuffle by randomly swaping pieces starting from the goal form
 		srand(time(NULL));
 
-		int numMoves = (rand() % 15) + 10; // Shuffle between 10 and 20 times
+		int numMoves = (rand() % 10) + 10; // Shuffle between 10 and 20 times
+		int shuffLastMoveValue = 0; // We use this so it doesn't interfere with our solution algorithims 
 
-		for (int i = 0; i <= numMoves; i++) {
+		for (int i = 0; i < numMoves; i++) {
 
-			// ****************************THIS WILL NEED TO BE CHANGED IN THE FUTURE*****************************
 			int blankX = 0;
 			int blankY = 0;
 			Vertex* blankSpace = GetBlankSpace(blankX, blankY);
 
 			vector<Vertex*> blankNeighbors = GetNeighbors(blankX, blankY);
 
-			int neighborSwap = rand() % static_cast<int>(blankNeighbors.size());
-			Swap(blankSpace, blankNeighbors[neighborSwap]);
+			int neighborSwap = 0;
 
+			do {
+				neighborSwap = rand() % static_cast<int>(blankNeighbors.size());
+			} while (blankNeighbors[neighborSwap]->GetValue() == shuffLastMoveValue); // Don't undo the last move we shuffled
+			shuffLastMoveValue = blankNeighbors[neighborSwap]->GetValue();
+			Swap(blankSpace, blankNeighbors[neighborSwap]);
 		}
 	}
 	else {
@@ -134,12 +143,19 @@ void Board::Shuffle()
 		myBoard[0][0]->SetValue(1);
 		myBoard[0][1]->SetValue(2);
 		myBoard[0][2]->SetValue(3);
-		myBoard[1][0]->SetValue(4);
-		myBoard[1][1]->SetValue(5);
-		myBoard[1][2]->SetValue(6);
-		myBoard[2][0]->SetValue(7);
-		myBoard[2][1]->SetValue(9);
-		myBoard[2][2]->SetValue(8);
+		myBoard[0][3]->SetValue(4);
+		myBoard[1][0]->SetValue(5);
+		myBoard[1][1]->SetValue(10);
+		myBoard[1][2]->SetValue(7);
+		myBoard[1][3]->SetValue(16);
+		myBoard[2][0]->SetValue(9);
+		myBoard[2][1]->SetValue(12);
+		myBoard[2][2]->SetValue(6);
+		myBoard[2][3]->SetValue(15);
+		myBoard[3][0]->SetValue(13);
+		myBoard[3][1]->SetValue(11);
+		myBoard[3][2]->SetValue(14);
+		myBoard[3][3]->SetValue(8);
 	}
 
 }
