@@ -1,6 +1,3 @@
-﻿  Board.cpp
-d:\profiles\rep4975\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(124): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\profiles\rep4975\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(245): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
-d:\profiles\rep4975\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(89): warning C4715: 'Board::GetBlankSpace': not all control paths return a value
-d:\profiles\rep4975\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(269): warning C4715: 'Board::GetPosition': not all control paths return a value
-  SlidingPuzzle.vcxproj -> D:\Profiles\rep4975\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe
+﻿  SlidingPuzzle.cpp
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\slidingpuzzle.cpp(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  SlidingPuzzle.vcxproj -> C:\Users\admin\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe
