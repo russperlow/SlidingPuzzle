@@ -19,8 +19,8 @@ vector<Vertex*> Puzzle::SolveA(Board _myBoard)
 	myBoard = _myBoard;
 
 	// Put current puzzle in "states" collection
-	State s = State(myBoard, 0);
-	vector<State> states;
+	State* s = new State(&myBoard, 0);
+	vector<State*> states;
 
 	states.push_back(s);
 
@@ -31,29 +31,29 @@ vector<Vertex*> Puzzle::SolveA(Board _myBoard)
 
 		// Find the lowest distance of all states stored
 		for (int i = 0; i < static_cast<int>(states.size()); i++) {
-			if (states[i].GetF() < states[best].GetF()) {
+			if (states[i]->GetF() < states[best]->GetF()) {
 				best = i;
 			}
 		}
 
 
-		State state = states[best];
+		State* state = states[best];
 		states.erase(states.begin() + best);
 
-		Board stateBoard = state.GetBoard();
+		Board* stateBoard = state->GetBoard();
 
 		// If solved we are done
-		if (stateBoard.CheckSolved()) {
-			return stateBoard.GetPath();
+		if (stateBoard->CheckSolved()) {
+			return stateBoard->GetPath();
 		}
 
 		// Get children of state
-		vector<Board> children = VisitState(state);
+		vector<Board*> children = VisitState(state);
 
 		// Loop through all children to calculate their respective F's
 		for (auto& child : children) {
-			int f = static_cast<int>(child.GetPath().size()) + child.GetManhattanDistance();
-			states.push_back(State(child, f));
+			int f = static_cast<int>(child->GetPath().size()) + child->GetManhattanDistance();
+			states.push_back(new State(child, f));
 		}
 
 	}
@@ -64,34 +64,35 @@ vector<Vertex*> Puzzle::SolveA(Board _myBoard)
 /*
 	* "Visit" the given state to get its next move
 */
-vector<Board> Puzzle::VisitState(State state)
+vector<Board*> Puzzle::VisitState(State* state)
 {
-	vector<Board> children;
+	vector<Board*> children;
 
-	Board stateBoard = state.GetBoard();
+	Board* stateBoard = state->GetBoard();
 
 	// Get this boards blank space
 	int blankX = 0;
 	int blankY = 0;
-	Vertex* blankSpace = stateBoard.GetBlankSpace(blankX, blankY);
+	Vertex* blankSpace = stateBoard->GetBlankSpace(blankX, blankY);
 
 	// Get all possible moves (neighbors to blank space)
-	vector<Vertex*> neighbors = stateBoard.GetNeighbors(blankX, blankY);
+	vector<Vertex*> neighbors = stateBoard->GetNeighbors(blankX, blankY);
 
 	// Loop through neighbors
 	for (int i = 0; i < static_cast<int>(neighbors.size()); i++) {
 
 		// Don't undo the last move
-		if (neighbors[i]->GetValue() != stateBoard.GetLastMove()) {
+		if (neighbors[i]->GetValue() != stateBoard->GetLastMove()) {
 			
-			Board newBoard(stateBoard);
+			Board* newBoard = new Board();
+			*newBoard = *stateBoard;
 			
-			Vertex* swapVert = newBoard.GetPosition(neighbors[i]->GetValue());
-			Vertex* oldBlankVert = newBoard.GetBlankSpace(blankX, blankY);
+			Vertex* swapVert = newBoard->GetPosition(neighbors[i]->GetValue());
+			Vertex* oldBlankVert = newBoard->GetBlankSpace(blankX, blankY);
 
-			newBoard.Swap(swapVert, oldBlankVert); // Swap neighbor and blank space
-			newBoard.AddToPath(oldBlankVert); // Add neighbor to path
-			newBoard.SetLastMove(swapVert->GetValue()); // Store the last move
+			newBoard->Swap(swapVert, oldBlankVert); // Swap neighbor and blank space
+			newBoard->AddToPath(oldBlankVert); // Add neighbor to path
+			newBoard->SetLastMove(swapVert->GetValue()); // Store the last move
 			children.push_back(newBoard); // Add the board to children vector
 		}
 	}

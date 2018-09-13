@@ -11,7 +11,7 @@ public:
 	~Puzzle();
 	
 	vector<Vertex*> SolveA(Board);
-	vector<Board> VisitState(State);
+	vector<Board*> VisitState(State*);
 
 	void SolveHill(Board*, int);
 	int HillMoves(Board, int, int);

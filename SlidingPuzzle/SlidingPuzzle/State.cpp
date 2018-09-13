@@ -2,7 +2,7 @@
 #include "State.h"
 
 
-State::State(Board _board, int _distance)
+State::State(Board* _board, int _distance)
 {
 	board = _board;
 	distance = _distance;
@@ -12,7 +12,7 @@ State::~State()
 {
 }
 
-Board State::GetBoard()
+Board* State::GetBoard()
 {
 	return board;
 }

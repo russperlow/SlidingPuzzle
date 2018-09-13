@@ -64,6 +64,11 @@ Board::Board(int _dimension)
 
 Board::~Board()
 {
+	for (int i = 0; i < dimension; i++) {
+		for (int j = 0; j < dimension; j++) {
+			delete myBoard[i][j];
+		}
+	}
 }
 
 /*
@@ -112,7 +117,7 @@ void Board::Print() {
 */
 void Board::Shuffle()
 {
-	bool realShuffle = true; // Just a variable to make testing more simple
+	bool realShuffle = false; // Just a variable to make testing more simple
 
 	if (realShuffle) {
 		// Shuffle by randomly swaping pieces starting from the goal form
@@ -145,17 +150,17 @@ void Board::Shuffle()
 		myBoard[0][2]->SetValue(3);
 		myBoard[0][3]->SetValue(4);
 		myBoard[1][0]->SetValue(5);
-		myBoard[1][1]->SetValue(10);
+		myBoard[1][1]->SetValue(6);
 		myBoard[1][2]->SetValue(7);
-		myBoard[1][3]->SetValue(16);
+		myBoard[1][3]->SetValue(8);
 		myBoard[2][0]->SetValue(9);
-		myBoard[2][1]->SetValue(12);
-		myBoard[2][2]->SetValue(6);
-		myBoard[2][3]->SetValue(15);
+		myBoard[2][1]->SetValue(10);
+		myBoard[2][2]->SetValue(11);
+		myBoard[2][3]->SetValue(12);
 		myBoard[3][0]->SetValue(13);
-		myBoard[3][1]->SetValue(11);
-		myBoard[3][2]->SetValue(14);
-		myBoard[3][3]->SetValue(8);
+		myBoard[3][1]->SetValue(14);
+		myBoard[3][2]->SetValue(16);
+		myBoard[3][3]->SetValue(15);
 	}
 
 }
