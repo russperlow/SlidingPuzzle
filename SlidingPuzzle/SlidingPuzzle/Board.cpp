@@ -2,6 +2,7 @@
 #include "Board.h"
 #include <stdio.h>
 #include <math.h>
+#include <iomanip>
 
 Board::Board() {
 
@@ -37,7 +38,7 @@ Board::Board(const Board& _board)
 	lastMovedValue = _board.lastMovedValue;
 }
 
-Board::Board(int _dimension)
+Board::Board(int _dimension, int numOfShuffles)
 {
 	dimension = _dimension;
 
@@ -57,7 +58,7 @@ Board::Board(int _dimension)
 		}
 	}
 
-	Shuffle();
+	Shuffle(numOfShuffles);
 }
 
 Board::~Board()
@@ -110,9 +111,9 @@ void Board::Print() {
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
 			if (myBoard[i][j] == blankSpace)
-				cout << " |";
+				cout << std::setw(3) << std::setfill(' ') << "|";
 			else
-				cout << myBoard[i][j] << "|";
+				cout << std::setw(2) << std::setfill('0') << myBoard[i][j] << "|";
 		}
 		cout << endl;
 	}
@@ -121,53 +122,38 @@ void Board::Print() {
 /*
 	* Randomly swaps the blank and its neighbors to shuffle
 */
-void Board::Shuffle()
+void Board::Shuffle(int numOfShuffles)
 {
-	bool realShuffle = true; // Just a variable to make testing more simple
+	// Init rand
+	srand(time(NULL));
 
-	if (realShuffle) {
-		// Shuffle by randomly swaping pieces starting from the goal form
-		srand(time(NULL));
-
-		int numMoves = (rand() % 10) + 10; // Shuffle between 10 and 20 times
-		int shuffLastMoveValue = 0; // We use this so it doesn't interfere with our solution algorithims 
-
-		for (int i = 0; i < numMoves; i++) {
-
-			int blankX = 0;
-			int blankY = 0;
-			GetBlankSpace(blankX, blankY);
-
-			vector<int> blankNeighbors = GetNeighbors(blankX, blankY);
-
-			int neighborSwap = 0;
-
-			do {
-				neighborSwap = rand() % static_cast<int>(blankNeighbors.size());
-			} while (blankNeighbors[neighborSwap] == shuffLastMoveValue); // Don't undo the last move we shuffled
-			shuffLastMoveValue = blankNeighbors[neighborSwap];
-			Swap(blankSpace, blankNeighbors[neighborSwap]);
-		}
-	}
-	else {
-		myBoard[0][0] = 1;
-		myBoard[0][1] = 2;
-		myBoard[0][2] = 3;
-		myBoard[0][3] = 4;
-		myBoard[1][0] = 5;
-		myBoard[1][1] = 6;
-		myBoard[1][2] = 7;
-		myBoard[1][3] = 8;
-		myBoard[2][0] = 16;
-		myBoard[2][1] = 10;
-		myBoard[2][2] = 11;
-		myBoard[2][3] = 12;
-		myBoard[3][0] = 9;
-		myBoard[3][1] = 13;
-		myBoard[3][2] = 14;
-		myBoard[3][3] = 15;
+	// If numOfShuffles is 0, the user request a random shuffle number
+	int numMoves = numOfShuffles;
+	if (numOfShuffles == 0) {
+		numMoves = (rand() % 10) + 10;
 	}
 
+	int shuffLastMoveValue = 0; // We use this so it doesn't interfere with our solution algorithims 
+
+	// Loop for shuffling pieces
+	for (int i = 0; i < numMoves; i++) {
+
+		int blankX = 0;
+		int blankY = 0;
+		GetBlankSpace(blankX, blankY);
+
+		vector<int> blankNeighbors = GetNeighbors(blankX, blankY);
+
+		int neighborSwap = 0;
+
+		do {
+			neighborSwap = rand() % static_cast<int>(blankNeighbors.size());
+		} while (blankNeighbors[neighborSwap] == shuffLastMoveValue); // Don't undo the last move we shuffled
+
+		// Store the move we are about to make, then move it
+		shuffLastMoveValue = blankNeighbors[neighborSwap];
+		Swap(blankSpace, blankNeighbors[neighborSwap]);
+	}
 }
 
 /*

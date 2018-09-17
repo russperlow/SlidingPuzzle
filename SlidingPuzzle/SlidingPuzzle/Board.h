@@ -5,14 +5,14 @@ class Board
 public:
 	Board();
 	Board(const Board&);
-	Board(int);
+	Board(int, int);
 	~Board();
 
 	void GetBlankSpace(int&, int&);
 	void Swap(int, int);
 	void SwapWithBlank(int);
 	void Print();
-	void Shuffle();
+	void Shuffle(int);
 	bool CheckSolved();
 	int GetDimension();
 	vector<int> GetPath();

@@ -1,3 +1,4 @@
-﻿  SlidingPuzzle.cpp
-c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\slidingpuzzle.cpp(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+﻿  Board.cpp
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(128): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(246): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   SlidingPuzzle.vcxproj -> C:\Users\admin\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe
