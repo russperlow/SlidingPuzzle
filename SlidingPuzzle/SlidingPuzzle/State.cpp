@@ -10,7 +10,6 @@ State::State(Board _board, int _distance)
 
 State::~State()
 {
-	//delete board;
 }
 
 Board State::GetBoard()

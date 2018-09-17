@@ -9,12 +9,14 @@ Puzzle::Puzzle()
 
 Puzzle::~Puzzle()
 {
+	// Delete all states we have used and removed from the states vector
 	while (static_cast<int>(removedStates.size()) > 0) {
 		State* state = removedStates.front();
 		removedStates.erase(removedStates.begin());
 		delete state;
 	}
 
+	// Delete any states we haven't touched
 	while (static_cast<int>(states.size()) > 0) {
 		State* state = states.front();
 		states.erase(states.begin());
@@ -28,8 +30,6 @@ Puzzle::~Puzzle()
 vector<int> Puzzle::SolveA(Board _myBoard)
 {
 	myBoard = _myBoard;
-	int dimension = myBoard.GetDimension();
-	blankSpace = dimension * dimension;
 
 	// Put current puzzle in "states" collection
 	State* s = new State(myBoard, 0);
@@ -49,6 +49,7 @@ vector<int> Puzzle::SolveA(Board _myBoard)
 		}
 
 
+		// Grab the new state, remove it from the vector we are using, store it to delete later
 		State* state = states[best];
 		states.erase(states.begin() + best);
 		removedStates.push_back(state);
@@ -101,7 +102,7 @@ vector<Board> Puzzle::VisitState(State* state)
 			int oldValue = neighbors[i];
 
 			newBoard.AddToPath(oldValue); // Add neighbor to path
-			newBoard.Swap(neighbors[i], blankSpace); // Swap neighbor and blank space
+			newBoard.SwapWithBlank(neighbors[i]); // Swap neighbor and blank space
 			newBoard.SetLastMove(oldValue); // Store the last move
 			children.push_back(newBoard); // Add the board to children vector
 		}
@@ -116,8 +117,6 @@ void Puzzle::SolveHill(Board* _myBoard, int depth)
 {
 	// Loop over all possible move for the current board
 	myBoard = *_myBoard;
-	int xBlank = 0;
-	int yBlank = 0;
 	int valueToMove = HillMoves(myBoard, depth, depth);
 	_myBoard->SetLastMove(valueToMove);
 	_myBoard->SwapWithBlank(valueToMove);
@@ -158,6 +157,7 @@ int Puzzle::HillMoves(Board _myBoard, int depth, int currLevel) {
 			// Copy board & make move
 			Board newBoard = (thisBoard);
 
+			// Get the piece we want to move's position and blank spaces position
 			int x = 0;
 			int y = 0;
 			newBoard.GetPosition(neighbors[i], x, y);
@@ -167,6 +167,7 @@ int Puzzle::HillMoves(Board _myBoard, int depth, int currLevel) {
 			newBoard.SwapWithBlank(swapValue); // Swap neighbor and blank space
 			newBoard.SetLastMove(swapValue); // Store the last move
 
+			// If we are at the start we will find the lowest dF, if not, just keep going
 			if(depth != currLevel)
 				return thisBoard.GetManhattanDistance() + HillMoves(newBoard, depth, currLevel-1);
 			else {

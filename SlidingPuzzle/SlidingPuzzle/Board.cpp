@@ -62,16 +62,11 @@ Board::Board(int _dimension)
 
 Board::~Board()
 {
-	//for (int i = 0; i < dimension; i++) {
-	//	for (int j = 0; j < dimension; j++) {
-	//		delete myBoard[i][j];
-	//	}
-	//}
 }
 
 /*
-* Find the vertex that contains dimension^2 on the board
-* Store the x & y location in the board variable and return the Vertex*
+	* Find the vertex that contains dimension^2 on the board
+	* Store the x & y location in the board variable and return the Vertex*
 */
 void Board::GetBlankSpace(int& x, int& y)
 {
@@ -87,7 +82,7 @@ void Board::GetBlankSpace(int& x, int& y)
 }
 
 /*
-* Swap the two given verticies
+	* Swap the two given verticies
 */
 void Board::Swap(int vert1, int vert2) {
 	int x1 = 0;
@@ -101,12 +96,15 @@ void Board::Swap(int vert1, int vert2) {
 	myBoard[x2][y2] = vert1;
 }
 
+/*
+	* Swaps the given value with the blank tile
+*/
 void Board::SwapWithBlank(int value) {
 	Swap(value, blankSpace);
 }
 
 /*
-* Prints out the current puzle
+	* Prints out the current board
 */
 void Board::Print() {
 	for (int i = 0; i < dimension; i++) {
@@ -121,11 +119,11 @@ void Board::Print() {
 }
 
 /*
-* Randomly moves around pieces to shuffle
+	* Randomly swaps the blank and its neighbors to shuffle
 */
 void Board::Shuffle()
 {
-	bool realShuffle = false; // Just a variable to make testing more simple
+	bool realShuffle = true; // Just a variable to make testing more simple
 
 	if (realShuffle) {
 		// Shuffle by randomly swaping pieces starting from the goal form
@@ -168,29 +166,12 @@ void Board::Shuffle()
 		myBoard[3][1] = 13;
 		myBoard[3][2] = 14;
 		myBoard[3][3] = 15;
-
-		/*myBoard[0][0]->SetValue(1);
-		myBoard[0][1]->SetValue(2);
-		myBoard[0][2]->SetValue(3);
-		myBoard[0][3]->SetValue(4);
-		myBoard[1][0]->SetValue(5);
-		myBoard[1][1]->SetValue(6);
-		myBoard[1][2]->SetValue(7);
-		myBoard[1][3]->SetValue(8);
-		myBoard[2][0]->SetValue(9);
-		myBoard[2][1]->SetValue(10);
-		myBoard[2][2]->SetValue(11);
-		myBoard[2][3]->SetValue(12);
-		myBoard[3][0]->SetValue(13);
-		myBoard[3][1]->SetValue(14);
-		myBoard[3][2]->SetValue(16);
-		myBoard[3][3]->SetValue(15);*/
 	}
 
 }
 
 /*
-* Check to see if the main puzzle is solved
+	* Check to see if this board is solved
 */
 bool Board::CheckSolved()
 {
@@ -201,7 +182,7 @@ bool Board::CheckSolved()
 			// The inital value that this vertex would have prior to shuffling
 			int value = (i * dimension) + j + 1;
 
-
+			// If a value is misplaced, it is not solved
 			if (myBoard[i][j] != value)
 				return false;
 		}
@@ -212,25 +193,31 @@ bool Board::CheckSolved()
 
 
 /*
-* Returns the dimension of the grid
+	* Returns the dimension of the grid
 */
 int Board::GetDimension()
 {
 	return dimension;
 }
 
+/*
+	* Return the solution path that has gotten us to this point
+*/
 vector<int> Board::GetPath()
 {
 	return path;
 }
 
+/*
+	* Add the move that got us here to the path
+*/
 void Board::AddToPath(int node)
 {
 	path.push_back(node);
 }
 
 /*
-* Gets the neighbors for the given vertex on the board at (x,y)
+	* Gets the values of the neighbors for the given vertex on the board at (x,y)
 */
 vector<int> Board::GetNeighbors(int x, int y)
 {
@@ -256,6 +243,10 @@ vector<int> Board::GetNeighbors(int x, int y)
 	return neighbors;
 }
 
+/*
+	* Will get the sum of all tiles distance from their current position and 
+	* their goal position
+*/
 int Board::GetManhattanDistance()
 {
 	int distance = 0;
@@ -294,11 +285,17 @@ void Board::GetPosition(int _value, int& x, int& y) {
 	}
 }
 
+/*
+	* Stores the last move we made
+*/
 void Board::SetLastMove(int _lastMovedValue)
 {
 	lastMovedValue = _lastMovedValue;
 }
 
+/*
+	* Returns the last move we made
+*/
 int Board::GetLastMove()
 {
 	return lastMovedValue;

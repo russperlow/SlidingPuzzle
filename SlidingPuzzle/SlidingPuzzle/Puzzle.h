@@ -16,7 +16,6 @@ public:
 	int HillMoves(Board, int, int);
 private:
 	int dimension;
-	int blankSpace;
 	Board myBoard;
 	vector<State*> states;
 	vector<State*> removedStates;
