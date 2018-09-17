@@ -101,6 +101,10 @@ void Board::Swap(int vert1, int vert2) {
 	myBoard[x2][y2] = vert1;
 }
 
+void Board::SwapWithBlank(int value) {
+	Swap(value, blankSpace);
+}
+
 /*
 * Prints out the current puzle
 */

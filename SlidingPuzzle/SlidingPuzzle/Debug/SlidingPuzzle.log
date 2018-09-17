@@ -1,4 +1,4 @@
 ﻿  Board.cpp
-c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(128): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(258): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(132): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+c:\users\admin\documents\dsa2\slidingpuzzle\slidingpuzzle\slidingpuzzle\board.cpp(262): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
   SlidingPuzzle.vcxproj -> C:\Users\admin\Documents\DSA2\SlidingPuzzle\SlidingPuzzle\Debug\SlidingPuzzle.exe

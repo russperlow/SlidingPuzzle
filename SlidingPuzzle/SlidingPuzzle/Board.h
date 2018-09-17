@@ -13,6 +13,7 @@ public:
 	void GetBlankSpace(int&, int&);
 	//void Swap(Vertex*, Vertex*);
 	void Swap(int, int);
+	void SwapWithBlank(int);
 	void Print();
 	void Shuffle();
 	bool CheckSolved();
