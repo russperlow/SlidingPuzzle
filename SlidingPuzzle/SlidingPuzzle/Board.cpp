@@ -125,7 +125,7 @@ void Board::Print() {
 */
 void Board::Shuffle()
 {
-	bool realShuffle = true; // Just a variable to make testing more simple
+	bool realShuffle = false; // Just a variable to make testing more simple
 
 	if (realShuffle) {
 		// Shuffle by randomly swaping pieces starting from the goal form
@@ -155,12 +155,19 @@ void Board::Shuffle()
 		myBoard[0][0] = 1;
 		myBoard[0][1] = 2;
 		myBoard[0][2] = 3;
-		myBoard[1][0] = 9;
-		myBoard[1][1] = 5;
-		myBoard[1][2] = 6;
-		myBoard[2][0] = 4;
-		myBoard[2][1] = 7;
-		myBoard[2][2] = 8;
+		myBoard[0][3] = 4;
+		myBoard[1][0] = 5;
+		myBoard[1][1] = 6;
+		myBoard[1][2] = 7;
+		myBoard[1][3] = 8;
+		myBoard[2][0] = 16;
+		myBoard[2][1] = 10;
+		myBoard[2][2] = 11;
+		myBoard[2][3] = 12;
+		myBoard[3][0] = 9;
+		myBoard[3][1] = 13;
+		myBoard[3][2] = 14;
+		myBoard[3][3] = 15;
 
 		/*myBoard[0][0]->SetValue(1);
 		myBoard[0][1]->SetValue(2);
