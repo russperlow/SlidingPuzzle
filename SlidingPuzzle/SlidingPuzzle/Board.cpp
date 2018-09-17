@@ -23,8 +23,7 @@ Board::Board(const Board& _board)
 	for (int i = 0; i < dimension; i++) {
 		myBoard[i].resize(dimension);
 		for (int j = 0; j < dimension; j++) {
-			int value = _board.myBoard[i][j]->GetValue();
-			myBoard[i][j] = new Vertex(value);// = *_board.myBoard[i][j];
+			myBoard[i][j] = _board.myBoard[i][j];
 		}
 	}
 
@@ -54,8 +53,7 @@ Board::Board(int _dimension)
 
 		for (int j = 0; j < dimension; j++) {
 			int value = (i * dimension) + j + 1;
-			Vertex* vertex = new Vertex(value);
-			myBoard[i][j] = vertex;
+			myBoard[i][j] = value;
 		}
 	}
 
@@ -64,25 +62,25 @@ Board::Board(int _dimension)
 
 Board::~Board()
 {
-	for (int i = 0; i < dimension; i++) {
-		for (int j = 0; j < dimension; j++) {
-			delete myBoard[i][j];
-		}
-	}
+	//for (int i = 0; i < dimension; i++) {
+	//	for (int j = 0; j < dimension; j++) {
+	//		delete myBoard[i][j];
+	//	}
+	//}
 }
 
 /*
 * Find the vertex that contains dimension^2 on the board
 * Store the x & y location in the board variable and return the Vertex*
 */
-Vertex* Board::GetBlankSpace(int& x, int& y)
+void Board::GetBlankSpace(int& x, int& y)
 {
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
-			if (myBoard[i][j]->GetValue() == blankSpace) {
+			if (myBoard[i][j] == blankSpace) {
 				x = i;
 				y = j;
-				return myBoard[i][j];
+				//return myBoard[i][j];
 			}
 		}
 	}
@@ -91,10 +89,16 @@ Vertex* Board::GetBlankSpace(int& x, int& y)
 /*
 * Swap the two given verticies
 */
-void Board::Swap(Vertex* vert1, Vertex* vert2) {
-	Vertex tempVert = *vert1;
-	*vert1 = *vert2;
-	*vert2 = tempVert;
+void Board::Swap(int vert1, int vert2) {
+	int x1 = 0;
+	int y1 = 0;
+	GetPosition(vert1, x1, y1);
+	int x2 = 0;
+	int y2 = 0;
+	GetPosition(vert2, x2, y2);
+
+	myBoard[x1][y1] = vert2;
+	myBoard[x2][y2] = vert1;
 }
 
 /*
@@ -103,10 +107,10 @@ void Board::Swap(Vertex* vert1, Vertex* vert2) {
 void Board::Print() {
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
-			if (myBoard[i][j]->GetValue() == blankSpace)
+			if (myBoard[i][j] == blankSpace)
 				cout << " |";
 			else
-				cout << myBoard[i][j]->GetValue() << "|";
+				cout << myBoard[i][j] << "|";
 		}
 		cout << endl;
 	}
@@ -117,7 +121,7 @@ void Board::Print() {
 */
 void Board::Shuffle()
 {
-	bool realShuffle = false; // Just a variable to make testing more simple
+	bool realShuffle = true; // Just a variable to make testing more simple
 
 	if (realShuffle) {
 		// Shuffle by randomly swaping pieces starting from the goal form
@@ -130,22 +134,31 @@ void Board::Shuffle()
 
 			int blankX = 0;
 			int blankY = 0;
-			Vertex* blankSpace = GetBlankSpace(blankX, blankY);
+			GetBlankSpace(blankX, blankY);
 
-			vector<Vertex*> blankNeighbors = GetNeighbors(blankX, blankY);
+			vector<int> blankNeighbors = GetNeighbors(blankX, blankY);
 
 			int neighborSwap = 0;
 
 			do {
 				neighborSwap = rand() % static_cast<int>(blankNeighbors.size());
-			} while (blankNeighbors[neighborSwap]->GetValue() == shuffLastMoveValue); // Don't undo the last move we shuffled
-			shuffLastMoveValue = blankNeighbors[neighborSwap]->GetValue();
+			} while (blankNeighbors[neighborSwap] == shuffLastMoveValue); // Don't undo the last move we shuffled
+			shuffLastMoveValue = blankNeighbors[neighborSwap];
 			Swap(blankSpace, blankNeighbors[neighborSwap]);
 		}
 	}
 	else {
+		myBoard[0][0] = 1;
+		myBoard[0][1] = 2;
+		myBoard[0][2] = 3;
+		myBoard[1][0] = 9;
+		myBoard[1][1] = 5;
+		myBoard[1][2] = 6;
+		myBoard[2][0] = 4;
+		myBoard[2][1] = 7;
+		myBoard[2][2] = 8;
 
-		myBoard[0][0]->SetValue(1);
+		/*myBoard[0][0]->SetValue(1);
 		myBoard[0][1]->SetValue(2);
 		myBoard[0][2]->SetValue(3);
 		myBoard[0][3]->SetValue(4);
@@ -160,7 +173,7 @@ void Board::Shuffle()
 		myBoard[3][0]->SetValue(13);
 		myBoard[3][1]->SetValue(14);
 		myBoard[3][2]->SetValue(16);
-		myBoard[3][3]->SetValue(15);
+		myBoard[3][3]->SetValue(15);*/
 	}
 
 }
@@ -178,7 +191,7 @@ bool Board::CheckSolved()
 			int value = (i * dimension) + j + 1;
 
 
-			if (myBoard[i][j]->GetValue() != value)
+			if (myBoard[i][j] != value)
 				return false;
 		}
 	}
@@ -195,12 +208,12 @@ int Board::GetDimension()
 	return dimension;
 }
 
-vector<Vertex*> Board::GetPath()
+vector<int> Board::GetPath()
 {
 	return path;
 }
 
-void Board::AddToPath(Vertex* node)
+void Board::AddToPath(int node)
 {
 	path.push_back(node);
 }
@@ -208,9 +221,9 @@ void Board::AddToPath(Vertex* node)
 /*
 * Gets the neighbors for the given vertex on the board at (x,y)
 */
-vector<Vertex*> Board::GetNeighbors(int x, int y)
+vector<int> Board::GetNeighbors(int x, int y)
 {
-	vector<Vertex*> neighbors;
+	vector<int> neighbors;
 
 	if (x > 0) {
 		neighbors.push_back(myBoard[x - 1][y]);
@@ -238,12 +251,12 @@ int Board::GetManhattanDistance()
 
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
-			Vertex* piece = myBoard[i][j];
+			int piece = myBoard[i][j];
 
-			if (piece->GetValue() != blankSpace) {
+			if (piece != blankSpace) {
 				// Get the inital row & inital column
-				int ogRow = floor((piece->GetValue() - 1) / dimension);
-				int ogColumn = (piece->GetValue() - 1) % dimension;
+				int ogRow = floor((piece - 1) / dimension);
+				int ogColumn = (piece - 1) % dimension;
 
 				// Absolute value distance from original space to current
 				distance += abs(i - ogRow) + abs(j - ogColumn);
@@ -258,11 +271,13 @@ int Board::GetManhattanDistance()
 /*
 	* Returns the x and y positions for the given value
 */
-Vertex* Board::GetPosition(int _value) {
+void Board::GetPosition(int _value, int& x, int& y) {
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
-			if (myBoard[i][j]->GetValue() == _value) {
-				return myBoard[i][j];
+			if (myBoard[i][j] == _value) {
+				x = i;
+				y = j;
+				return;// myBoard[i][j];
 			}
 		}
 	}

@@ -6,12 +6,12 @@
 class State
 {
 public:
-	State(Board*, int);
+	State(Board, int);
 	~State();
-	Board* GetBoard();
+	Board GetBoard();
 	int GetF();
 private:
-	Board* board;
+	Board board;
 	int distance;
 };
 
