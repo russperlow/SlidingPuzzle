@@ -1,6 +1,5 @@
 #pragma once
 #include "stdafx.h"
-#include "Vertex.h"
 #include "State.h"
 #include "Board.h"
 

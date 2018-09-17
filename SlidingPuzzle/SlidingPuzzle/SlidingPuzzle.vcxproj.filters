@@ -24,9 +24,6 @@
     <ClInclude Include="Puzzle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vertex.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="State.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -42,9 +39,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Puzzle.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vertex.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="State.cpp">
