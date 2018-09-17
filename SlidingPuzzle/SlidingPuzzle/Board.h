@@ -27,6 +27,7 @@ private:
 	int dimension;
 	int blankSpace;
 	int lastMovedValue;
+	int outputWidth;
 	vector<vector<int>> myBoard;
 	vector<int> path;
 };

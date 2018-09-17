@@ -19,6 +19,15 @@ Board::Board(const Board& _board)
 	// Store blank space
 	blankSpace = dimension * dimension;
 
+	// Get the largest number of digits for sizing when printing
+	int length = 1;
+	int largestNum = blankSpace;
+	for (length = 0; largestNum > 0; length++) {
+		largestNum /= 10;
+	}
+
+	outputWidth = length;
+
 	// Copy values over for myBoard
 	myBoard.resize(dimension);
 	for (int i = 0; i < dimension; i++) {
@@ -40,9 +49,18 @@ Board::Board(const Board& _board)
 
 Board::Board(int _dimension, int numOfShuffles)
 {
+	// Store dimension & blankspace
 	dimension = _dimension;
-
 	blankSpace = dimension * dimension;
+
+	// Get the largest number of digits for sizing when printing
+	int length = 1;
+	int largestNum = blankSpace-1;
+	for (length = 0; largestNum > 0; length++) {
+		largestNum /= 10;
+	}
+
+	outputWidth = length;
 
 	// Give the board its width dimension
 	myBoard.resize(dimension);
@@ -110,10 +128,12 @@ void Board::SwapWithBlank(int value) {
 void Board::Print() {
 	for (int i = 0; i < dimension; i++) {
 		for (int j = 0; j < dimension; j++) {
+
+			// Print out the numbers, all the same number of digits for symmetry
 			if (myBoard[i][j] == blankSpace)
-				cout << std::setw(3) << std::setfill(' ') << "|";
+				cout << std::setw(outputWidth+1) << std::setfill(' ') << "|";
 			else
-				cout << std::setw(2) << std::setfill('0') << myBoard[i][j] << "|";
+				cout << std::setw(outputWidth) << std::setfill('0') << myBoard[i][j] << "|";
 		}
 		cout << endl;
 	}
